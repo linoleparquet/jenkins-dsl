@@ -1,9 +1,15 @@
 import org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval
 
 pipelineJob('lior_backend') {
+    properties {
+        pipelineTriggers {
+            triggers {
+                upstream('init', 'SUCESS')
+            }
+        }
+    }
     definition {
         cps {
-            // https://stackoverflow.com/questions/43699190/seed-job-asks-for-script-approval-in-jenkins
             script(readFileFromWorkspace('lior_backend.groovy'))
         }
     }
@@ -12,7 +18,6 @@ pipelineJob('lior_backend') {
 pipelineJob('lior_frontend') {
     definition {
         cps {
-            // https://stackoverflow.com/questions/43699190/seed-job-asks-for-script-approval-in-jenkins
             script(readFileFromWorkspace('lior_frontend.groovy'))
         }
     }
