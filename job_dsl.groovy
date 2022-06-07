@@ -1,13 +1,6 @@
 import org.jenkinsci.plugins.scriptsecurity.scripts.ScriptApproval
 
 pipelineJob('lior_backend') {
-    properties {
-        pipelineTriggers {
-            triggers {
-                upstream('init', 'SUCESS')
-            }
-        }
-    }
     definition {
         cps {
             script(readFileFromWorkspace('lior_backend.groovy'))
