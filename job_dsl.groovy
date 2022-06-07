@@ -16,7 +16,16 @@ pipelineJob('lior_frontend') {
     }
 }
 
+pipelineJob('lior_backend') {
+    definition {
+        cps {
+            script(readFileFromWorkspace('deploy.groovy'))
+        }
+    }
+}
+
 // https://stackoverflow.com/a/55940005/13630006
+// Useless ??
 ScriptApproval scriptApproval = ScriptApproval.get()
 scriptApproval.pendingScripts.each {
     scriptApproval.approveScript(it.hash)
